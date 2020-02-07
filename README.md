@@ -7,7 +7,12 @@ Small tool to Grab subdomains of a target
 ## Usage
 ```bash
 go run main.go -d target.com -s YourAPIKEY
+```
+## Usage download from releases:
 
+https://github.com/incogbyte/shosubgo/releases
+
+```bash
 # From Download Releases
 
 ./shosubgo_linux -d target.com -s YourAPIKEY
