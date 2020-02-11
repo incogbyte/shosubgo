@@ -22,14 +22,6 @@ func main() {
 
 	apiKey := apishodan.New(*shodanKey)
 
-	info, err := apiKey.InfoAccount()
-	if err != nil {
-		log.Panicln(err)
-	}
-	fmt.Printf(
-		"Credits: %d\nScan Credits: %d \n\n",
-		info.QueryCredits, info.ScanCredits)
-
 	domainSearch := *domain
 
 	subdomain, err := apiKey.GetSubdomain(domainSearch)
@@ -37,9 +29,17 @@ func main() {
 		log.Panicln(err)
 	}
 
-	fmt.Printf("[+] Domain search: %s\n", domainSearch)
-
 	if *verbose == true {
+
+		info, err := apiKey.InfoAccount()
+
+		if err != nil {
+			log.Panicln(err)
+		}
+
+		fmt.Printf(
+			"Credits: %d\nScan Credits: %d \n\n",
+			info.QueryCredits, info.ScanCredits)
 
 		for _, v := range subdomain.Data {
 			d := v.SubD + subdomain.Domain
