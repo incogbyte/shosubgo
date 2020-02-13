@@ -1,5 +1,5 @@
 # shosubgo
-Small tool to Grab subdomains of a target
+Small tool to Grab subdomains using Shodan api.
 
 ## Get your shodan api FREE with limit usage:
 <https://developer.shodan.io/api/requirements>
