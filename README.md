@@ -10,7 +10,7 @@ go run main.go -d target.com -s YourAPIKEY
 ```
 ## Usage download from releases:
 
-https://github.com/incogbyte/shosubgo/releases
+https://github.com/rodnt/shosubgo/releases
 
 ```bash
 # From Download Releases
