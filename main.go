@@ -13,10 +13,12 @@ func main() {
 	domain := flag.String("d", "", "[+] Domain to find subdomains")
 	shodanKey := flag.String("s", "", "[+] Shodan api key")
 	verbose := flag.Bool("v", false, "[+] Show all output")
+	fileName := flag.String("o", "", "[+] Save domains into a file")
 	flag.Parse()
 
 	if *domain == "" || *shodanKey == "" {
 		fmt.Printf("Usage %s -d target.com -s MYShodaNKey", os.Args[0])
+		fmt.Println("=> Author: rodnt \n\n thanks for using this tool =) PR are welcome")
 		os.Exit(1)
 	}
 
@@ -48,6 +50,20 @@ func main() {
 
 	} else {
 		for _, v := range subdomain.SubDomains {
+			if *fileName != "" {
+				f, err := os.Create(*fileName)
+				if err != nil {
+					log.Fatal(err)
+				}
+
+				defer f.Close()
+
+				_, err2 := f.WriteString(v + "\n")
+				if err2 != nil {
+					log.Fatal(err2)
+				}
+				fmt.Println("==> DONE write files")
+			}
 			fmt.Printf("%s.%s\n", v, domainSearch)
 		}
 	}

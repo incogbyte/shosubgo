@@ -71,14 +71,6 @@ func (s *API) GetSubdomain(domain string) (*JsonSubDomain, error) {
 	}
 	defer res.Body.Close()
 
-	//debug
-	// r, err := ioutil.ReadAll(res.Body)
-	// if err != nil {
-	// 	fmt.Println(err)
-	// }
-	// b := string(r)
-	// fmt.Println(b)
-
 	var sub JsonSubDomain
 
 	if err := json.NewDecoder(res.Body).Decode(&sub); err != nil {
