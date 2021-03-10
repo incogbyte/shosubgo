@@ -17,8 +17,8 @@ func main() {
 	flag.Parse()
 
 	if *domain == "" || *shodanKey == "" {
-		fmt.Printf("Usage %s -d target.com -s MYShodaNKey", os.Args[0])
-		fmt.Println("=> Author: rodnt \n\n thanks for using this tool =) PR are welcome")
+		fmt.Printf("[*] Usage %s -d target.com -s MYShodaNKey", os.Args[0])
+		fmt.Println("[*] Author: p0wnX \n\n thanks for using this tool =) PR are welcome")
 		os.Exit(1)
 	}
 
@@ -40,12 +40,12 @@ func main() {
 		}
 
 		fmt.Printf(
-			"Credits: %d\nScan Credits: %d \n\n",
+			"[*] Credits: %d\nScan Credits: %d \n\n",
 			info.QueryCredits, info.ScanCredits)
 
 		for _, v := range subdomain.Data {
 			d := v.SubD + subdomain.Domain
-			fmt.Printf("Domain: %s\nIP/DNS :%s\nLast Scan made by shodan:%s\n", d, v.Value, v.LastSeen)
+			fmt.Printf("[*] Domain: %s\nIP/DNS :%s\nLast Scan made by shodan:%s\n", d, v.Value, v.LastSeen)
 		}
 
 	} else {
@@ -62,7 +62,7 @@ func main() {
 				if err2 != nil {
 					log.Fatal(err2)
 				}
-				fmt.Println("==> DONE write files")
+				fmt.Println("[*] DONE write files")
 			}
 			fmt.Printf("%s.%s\n", v, domainSearch)
 		}
