@@ -9,6 +9,8 @@ import (
 	"./apishodan"
 )
 
+const Author = "0xc4t"
+
 func main() {
 	domain := flag.String("d", "", "[+] Domain to find subdomains")
 	shodanKey := flag.String("s", "", "[+] Shodan api key")
@@ -18,7 +20,7 @@ func main() {
 
 	if *domain == "" || *shodanKey == "" {
 		fmt.Printf("[*] Usage %s -d target.com -s MYShodaNKey", os.Args[0])
-		fmt.Println("[*] Author: p0wnX \n\n thanks for using this tool =) PR are welcome")
+		fmt.Printf("[*] Author: %s \n\n thanks for using this tool =) PR are welcome", Author)
 		os.Exit(1)
 	}
 
