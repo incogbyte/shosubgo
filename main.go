@@ -6,7 +6,7 @@ import (
 	"log"
 	"os"
 
-	"./apishodan"
+	"github.com/0xrod/shosubgo/apishodan"
 )
 
 const Author = "0xrod"
@@ -19,8 +19,8 @@ func main() {
 	flag.Parse()
 
 	if *domain == "" || *shodanKey == "" {
-		fmt.Printf("[*] Usage %s -d target.com -s MYShodaNKey", os.Args[0])
-		fmt.Printf("[*] Author: %s \n\n thanks for using this tool =) PR are welcome", Author)
+		fmt.Printf("[*] Usage %s -d target.com -s MYShodaNKey\n", os.Args[0])
+		fmt.Printf("[*] Author: %s \n\n thanks for using this tool =) PR are welcome \n", Author)
 		os.Exit(1)
 	}
 
