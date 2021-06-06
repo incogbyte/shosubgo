@@ -6,10 +6,10 @@ import (
 	"log"
 	"os"
 
-	"github.com/0xrod/shosubgo/apishodan"
+	"github.com/r00td3v/shosubgo/apishodan"
 )
 
-const Author = "0xrod"
+const Author = "r00td3v"
 
 func main() {
 	domain := flag.String("d", "", "[+] Domain to find subdomains")
