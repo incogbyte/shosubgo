@@ -4,6 +4,13 @@ Small tool to Grab subdomains using Shodan api.
 ## Get your shodan api FREE with limit usage:
 <https://developer.shodan.io/api/requirements>
 
+## Install
+
+```bash
+$ go get github.com/d3ftx/shosubgo/apishoda
+$ go build main.go
+```
+
 ## Usage
 ```bash
 go run main.go -d target.com -s YourAPIKEY
