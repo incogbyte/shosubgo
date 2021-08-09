@@ -6,7 +6,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/rodnt/shosubgo/apishodan"
+	"github.com/d3ftx/shosubgo/apishodan"
 )
 
 const Author = "rodnt"
