@@ -9,7 +9,7 @@ import (
 	"github.com/d3ftx/shosubgo/apishodan"
 )
 
-const Author = "rodnt"
+const Author = "d3ftx"
 
 func main() {
 	domain := flag.String("d", "", "[+] Domain to find subdomains")
