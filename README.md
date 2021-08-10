@@ -7,7 +7,7 @@ Small tool to Grab subdomains using Shodan api.
 ## Install
 
 ```bash
-$ go get github.com/d3ftx/shosubgo/apishodan
+$ go get github.com/incogbyte/shosubgo/apishodan
 $ go build main.go
 ```
 
@@ -17,7 +17,7 @@ go run main.go -d target.com -s YourAPIKEY
 ```
 ## Usage download from releases:
 
-https://github.com/d3ftx/shosubgo/releases/tag/1.1
+https://github.com/incogbyte/shosubgo/releases/tag/1.1
 
 ```bash
 # From Download Releases
