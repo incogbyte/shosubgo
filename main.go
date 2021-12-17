@@ -6,7 +6,7 @@ import (
 	"log"
 	"os"
 
-	"apishodan"
+	"./apishodan"
 )
 
 const Author = "inc0gbyt3"
