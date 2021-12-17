@@ -14,8 +14,8 @@ $ go build main.go
 ```
 
 To build from source, now that Go does not support relative addressing:
-In main.go, change ./apishodan to apishodan in imports
-Move apishodan/api.go to the /usr/lib/go-<version>/src/ folder
+- In main.go, change ./apishodan to apishodan in imports
+- Move apishodan/api.go to the /usr/lib/go-<version>/src/ folder
 
 ```bash
 $ go build main.go
