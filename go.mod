@@ -1,4 +1,4 @@
-module github.com/zer0koan/shosubgo
+module github.com/incogbyte/shosubgo
 
 go 1.16
 
