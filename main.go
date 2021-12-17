@@ -6,7 +6,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/incogbyte/shosubgo/apishodan"
+	"apishodan"
 )
 
 const Author = "inc0gbyt3"
