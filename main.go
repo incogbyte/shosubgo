@@ -12,10 +12,10 @@ import (
 const Author = "inc0gbyt3"
 
 func main() {
-	domain := flag.String("d", "", "[+] Domain to find subdomains")
-	shodanKey := flag.String("s", "", "[+] Shodan api key")
-	verbose := flag.Bool("v", false, "[+] Show all output")
-	fileName := flag.String("o", "", "[+] Save domains into a file")
+	domain := flag.String("d", "", "> Domain to find subdomains")
+	shodanKey := flag.String("s", "", "> Shodan api key")
+	verbose := flag.Bool("v", false, "> Show all output")
+	fileName := flag.String("o", "", "> Save domains into a file")
 	flag.Parse()
 
 	if *domain == "" || *shodanKey == "" {
