@@ -9,8 +9,8 @@ Small tool to Grab subdomains using Shodan api.
 ## Install
 
 ```bash
-$ go get github.com/incogbyte/shosubgo/apishodan
-$ go build main.go
+$ go install github.com/incogbyte/shosubgo@latest
+# verify inside your $GOPATH the folder "bin"
 ```
 
 ## Usage
