@@ -15,7 +15,7 @@ $ go install github.com/incogbyte/shosubgo@latest
 
 ## Usage
 ```bash
-go run main.go -d target.com -s YourAPIKEY
+go run main.go -d target.com -s YourAPIKEY / go run main.go -f file -s YourAPIKEY
 ```
 ## Usage download from releases:
 
@@ -25,6 +25,7 @@ https://github.com/incogbyte/shosubgo/releases/tag/1.1
 # From Download Releases
 
 ./shosubgo_linux -d target.com -s YourAPIKEY
+./shosubgo_linux -f file -s YourAPIKEY
 ```
 
 ![shosubgo](https://raw.githubusercontent.com/incogbyte/shosubgo/master/shosubgo.png)
