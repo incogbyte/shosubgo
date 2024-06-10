@@ -1,9 +1,5 @@
 # shosubgo
 Small tool to Grab subdomains using Shodan api.
-
-> Quoted in the vídeo https://www.youtube.com/watch?v=qLTe6Z10vj8 h@cktivitycon 2020: The Bug Hunter's Methodology v4: Recon Edition by @Jhaddix
-> Mentioned at @SANSOffensive con :) 2024 by @Jhaddix
-
 ## Get your shodan api FREE with limit usage:
 <https://developer.shodan.io/api/requirements>
 
@@ -31,5 +27,10 @@ https://github.com/incogbyte/shosubgo/releases/tag/1.1
 
 ![shosubgo](https://raw.githubusercontent.com/incogbyte/shosubgo/master/shosubgo.png)
 
-
 ![gopher](https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTFcFPxQzLnq18PnHBkUxF6KfavmHX9q6Ukz-JWSNOg7iJu7Dsy)
+
+#### Mentions
+
+1. Quoted in the vídeo https://www.youtube.com/watch?v=qLTe6Z10vj8 h@cktivitycon 2020: The Bug Hunter's Methodology v4: Recon Edition by @Jhaddix
+2. Mentioned at @SANSOffensive con :) 2024 by @Jhaddix
+
