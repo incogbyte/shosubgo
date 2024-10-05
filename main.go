@@ -17,11 +17,11 @@ func main() {
     shodanKey := flag.String("s", "", "> Shodan api key")
     verbose := flag.Bool("v", false, "> Show all output")
     fileName := flag.String("o", "", "> Save domains into a file")
-    inputFile := flag.String("F", "", "> File containing domains to find subdomains")
+    inputFile := flag.String("f", "", "> File containing domains to find subdomains")
     flag.Parse()
 
     if *domain == "" && *inputFile == "" {
-        fmt.Printf("[*] Usage: %s -d target.com -s MYShodaNKey [-F input_file]\n", os.Args[0])
+        fmt.Printf("[*] Usage: %s -d target.com -s shodanKey [-f input_file]\n", os.Args[0])
         fmt.Printf("[*] Author: %s\n", Author)
         os.Exit(1)
     }
@@ -31,12 +31,10 @@ func main() {
     var domains []string
 
     if *domain != "" {
-        // Use domain from command-line argument (-d)
         domains = append(domains, *domain)
     }
 
     if *inputFile != "" {
-        // Read domains from file specified by -F flag
         fileDomains, err := readDomainsFromFile(*inputFile)
         if err != nil {
             log.Fatalf("Failed to read domains from file: %v", err)
