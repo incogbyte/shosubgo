@@ -3,6 +3,7 @@ package apishodan
 import (
 	"encoding/json"
 	"fmt"
+	"io"
 	"net/http"
 )
 
@@ -41,31 +42,31 @@ func New(key string) *API {
 }
 
 func (s *API) InfoAccount() (*JsonData, error) {
-    res, err := http.Get(fmt.Sprintf("%s/api-info?key=%s", URL, s.apiKey))
-    if err != nil {
-        return nil, fmt.Errorf("failed to make request ( Info Account Shodan ): %v", err)
-    }
-    defer res.Body.Close()
+	res, err := http.Get(fmt.Sprintf("%s/api-info?key=%s", URL, s.apiKey))
+	if err != nil {
+		return nil, fmt.Errorf("failed to make request ( Info Account Shodan ): %v", err)
+	}
+	defer res.Body.Close()
 
-    if res.StatusCode == http.StatusUnauthorized {
-        return nil, fmt.Errorf("authorization error: invalid Shodan API key (HTTP 401)")
-    }
+	if res.StatusCode == http.StatusUnauthorized {
+		return nil, fmt.Errorf("authorization error: invalid Shodan API key (HTTP 401)")
+	}
 
-    if res.StatusCode != http.StatusOK {
-        return nil, fmt.Errorf("unexpected status code: %d", res.StatusCode)
-    }
+	if res.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("unexpected status code: %d", res.StatusCode)
+	}
 
-    body, err := io.ReadAll(res.Body)
-    if err != nil {
-        return nil, fmt.Errorf("failed to read response body: %v", err)
-    }
+	body, err := io.ReadAll(res.Body)
+	if err != nil {
+		return nil, fmt.Errorf("failed to read response body: %v", err)
+	}
 
-    var ret JsonData
-    if err := json.Unmarshal(body, &ret); err != nil {
-        return nil, fmt.Errorf("failed to decode JSON response: %v", err)
-    }
+	var ret JsonData
+	if err := json.Unmarshal(body, &ret); err != nil {
+		return nil, fmt.Errorf("failed to decode JSON response: %v", err)
+	}
 
-    return &ret, nil
+	return &ret, nil
 }
 
 func (s *API) GetSubdomain(domain string) (*JsonSubDomain, error) {
