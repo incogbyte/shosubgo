@@ -2,6 +2,7 @@ package main
 
 import (
     "bufio"
+    "encoding/json"
     "flag"
     "fmt"
     "log"
@@ -18,6 +19,7 @@ func main() {
     verbose := flag.Bool("v", false, "> Show all output")
     fileName := flag.String("o", "", "> Save domains into a file")
     inputFile := flag.String("f", "", "> File containing domains to find subdomains")
+    jsonFlag := flag.Bool("json", false, "> Save output in JSON format")
     flag.Parse()
 
     if *domain == "" && *inputFile == "" {
@@ -54,7 +56,7 @@ func main() {
             continue
         }
 
-        if *verbose == true {
+        if *verbose {
             info, err := apiKey.InfoAccount()
             if err != nil {
                 fmt.Printf("Error fetching account info: %v\n", err)
@@ -67,21 +69,45 @@ func main() {
                 fmt.Printf("[*] Domain: %s\nIP/DNS: %s\nLast Scan made by Shodan: %s\n", d, v.Value, v.LastSeen)
             }
         } else {
-            for _, v := range subdomain.SubDomains {
+            if *jsonFlag {
+                jsonData, err := json.MarshalIndent(subdomain.SubDomains, "", "  ")
+                if err != nil {
+                    log.Fatal("Error marshaling JSON:", err)
+                }
                 if *fileName != "" {
                     f, err := os.OpenFile(*fileName, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
                     if err != nil {
                         log.Fatal(err)
                     }
-                    defer f.Close()
-
-                    _, err = f.WriteString(v + "\n")
+                    _, err = f.Write(jsonData)
                     if err != nil {
                         log.Fatal(err)
                     }
-                    fmt.Println("[*] DONE writing to file:", *fileName)
+                    _, err = f.WriteString("\n")
+                    if err != nil {
+                        log.Fatal(err)
+                    }
+                    f.Close()
+                    fmt.Println("[*] DONE writing JSON to file:", *fileName)
+                } else {
+                    fmt.Println(string(jsonData))
                 }
-                fmt.Printf("%s.%s\n", v, domainSearch)
+            } else {
+                for _, v := range subdomain.SubDomains {
+                    if *fileName != "" {
+                        f, err := os.OpenFile(*fileName, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+                        if err != nil {
+                            log.Fatal(err)
+                        }
+                        _, err = f.WriteString(v + "\n")
+                        if err != nil {
+                            log.Fatal(err)
+                        }
+                        f.Close()
+                        fmt.Println("[*] DONE writing to file:", *fileName)
+                    }
+                    fmt.Printf("%s.%s\n", v, domainSearch)
+                }
             }
         }
     }
