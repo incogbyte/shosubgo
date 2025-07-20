@@ -14,6 +14,18 @@ $ go install github.com/incogbyte/shosubgo@latest
 ```bash
 go run main.go -d target.com -s YourAPIKEY / go run main.go -f file -s YourAPIKEY
 ```
+
+If you want the tool to fail instantly on any error, use `-fail` flag:
+
+```bash
+$ go run main.go -d target.com -s YourAPIKEY
+Error fetching subdomains for domain target.com: invalid API key
+
+$ go run main.go -d target.com -s YourAPIKEY -fail
+Error fetching subdomains for domain target.com: invalid API key
+exit status 1
+```
+
 ## Usage download from releases:
 
 https://github.com/incogbyte/shosubgo/releases/tag/1.1

@@ -2,9 +2,15 @@ package apishodan
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io"
 	"net/http"
+)
+
+var (
+	ErrInsufficientCredits = errors.New("insufficient query credits")
+	ErrInvalidAPIKey       = errors.New("invalid API key")
 )
 
 const URL = "https://api.shodan.io"
@@ -37,6 +43,10 @@ type SubDomain struct {
 	LastSeen string `json:"last_seen,omitempty"`
 }
 
+type ErrorResponse struct {
+	Error string `json:"error"`
+}
+
 func New(key string) *API {
 	return &API{apiKey: key}
 }
@@ -49,7 +59,7 @@ func (s *API) InfoAccount() (*JsonData, error) {
 	defer res.Body.Close()
 
 	if res.StatusCode == http.StatusUnauthorized {
-		return nil, fmt.Errorf("authorization error: invalid Shodan API key (HTTP 401)")
+		return nil, ErrInvalidAPIKey
 	}
 
 	if res.StatusCode != http.StatusOK {
@@ -71,21 +81,36 @@ func (s *API) InfoAccount() (*JsonData, error) {
 
 func (s *API) GetSubdomain(domain string) (*JsonSubDomain, error) {
 
-	url := URLDOMAIN + domain + "?key=" + s.apiKey
+	url := fmt.Sprintf("%s%s?key=%s", URLDOMAIN, domain, s.apiKey)
 	res, err := http.Get(url)
 
 	if err != nil {
-		fmt.Println(">> Something went wrong")
-		panic(err)
+		return nil, fmt.Errorf("failed to execute http request: %w", err)
 	}
 	defer res.Body.Close()
 
-	var sub JsonSubDomain
-
-	if err := json.NewDecoder(res.Body).Decode(&sub); err != nil {
-		return nil, err
+	if res.StatusCode == http.StatusOK {
+		var sub JsonSubDomain
+		if err := json.NewDecoder(res.Body).Decode(&sub); err != nil {
+			return nil, fmt.Errorf("failed to decode successful response: %w", err)
+		}
+		return &sub, nil
 	}
 
-	return &sub, nil
+	if res.StatusCode == http.StatusUnauthorized {
+		body, err := io.ReadAll(res.Body)
+		if err != nil {
+			return nil, fmt.Errorf("failed to read error response body: %w", err)
+		}
 
+		var errResp ErrorResponse
+		if json.Unmarshal(body, &errResp) == nil {
+			if errResp.Error == "Insufficient query credits, please upgrade your API plan or wait for the monthly limit to reset" {
+				return nil, ErrInsufficientCredits
+			}
+		}
+		return nil, ErrInvalidAPIKey
+	}
+
+	return nil, fmt.Errorf("shodan API returned non-200 status: %d", res.StatusCode)
 }
